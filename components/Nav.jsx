@@ -5,6 +5,7 @@ import { AiOutlineClose } from "react-icons/ai";
 import { FaWallet, FaTelegramPlane } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 function Nav() {
   const [open, setIsOpen] = useState(false);
@@ -23,14 +24,14 @@ function Nav() {
     <>
       <div className=' flex items-center justify-between px-[18px] fixed top-0 z-50 left-0 right-0 h-[70px] bg-black lg:px-[30px]  lg:h-[100px]'>
         <li className='hidden lg:flex text-white press-font space-x-10'>
-          <ul>TRADE</ul>
+          <Link href="/swap" >TRADE</Link>
           <ul>EARN</ul>
         </li>
 
-        <div className='hidden lg:flex text-purple  justify-center items-center press-font space-x-[20px] '>
+        <Link href="/" className='hidden lg:flex text-purple  justify-center items-center press-font space-x-[20px] '>
           <Image src='logo.svg' width={90} height={117} />
           <p className='text-purple text-[20px]'>ROSWELL</p>
-        </div>
+        </Link>
 
         <Image src='/logo.svg' width={64} height={64} className='lg:hidden' />
         <RxHamburgerMenu
@@ -68,7 +69,7 @@ function Nav() {
           <p className='text-purple text-[20px]'>ROSWELL</p>
         </div>
         <li className=' text-white press-font text-[40px] flex flex-col space-y-5 mt-20 '>
-          <ul>TRADE</ul>
+        <Link href="/swap" >TRADE</Link>
           <ul>EARN</ul>
         </li>
         <div className='text-purple flex text-[40px] space-x-10 mt-10'>
