@@ -7,8 +7,8 @@ import Image  from 'next/image';
 
 function Nav() {
   return (
-    <div className=' flex items-center justify-between px-[18px] fixed top-0 z-50 left-0 right-0 h-[70px] bg-black lg:px-[30px]'>
-        <li className="hidden lg:flex text-white press-font " >
+    <div className=' flex items-center justify-between px-[18px] fixed top-0 z-50 left-0 right-0 h-[70px] bg-black lg:px-[30px]  lg:h-[100px]'>
+        <li className="hidden lg:flex text-white press-font space-x-10" >
             <ul>TRADE</ul>
             <ul>EARN</ul>
         </li>

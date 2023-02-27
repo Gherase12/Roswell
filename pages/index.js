@@ -15,20 +15,32 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <div className="h-screen relative flex flex-col items-center overflow-hidden w-full">
+      <section className="h-screen relative flex flex-col items-center overflow-hidden w-full">
 
       
         <Image src="/robot-lg.webp"  fill className="object-cover z-[10] hidden lg:flex " />
       
       
 
-      <h1 className='text-purple press-font font-[20px] text-center my-[50px] lg:text-[60px] max-w-[1000px] z-20 ' >Welcome to the AI ROSWELL </h1>
+      <h1 className='text-purple press-font font-[20px] text-center  my-[80px] lg:text-[60px] max-w-[1000px] z-20 ' >Welcome to the AI ROSWELL </h1>
       <input type="text" placeholder='Ask me any question... '  className="bg-purple-black w-[320px] h-[49px] rounded-full p-4 text-white z-20 lg:w-[700px] lg:mt-[300px] outline-none lg:h-[60px] "/>
       <button className='rounded-full w-[70px] h-[70px] bg-violet-700/25 flex items-center justify-center  my-[30px] z-20' >
         <BiMicrophone className='text-white text-[30px]  ' />
       </button>
       <Image src={"/robot-sm.webp"} width={300}  height={300} className="lg:hidden" />
-      </div>
+      </section>
+
+
+      {/* second section */}
+
+
+      <section className="" >
+        <p className='' >
+        Meet Roswell, the intelligent robot designed to enhance your experience in a digital ecosystem. With advanced AI, you can swap, farm, and stake coins for rewards, while playing against Roswell for incentives. Roswell's personalized interface and constant learning make it easy to stay ahead of the game. Join now and discover a new world of possibilities with Roswell as your guide.
+        </p>
+
+      </section>
+
     </div>
   )
 }
