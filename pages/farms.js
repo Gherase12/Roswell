@@ -12,9 +12,9 @@ function Farms() {
 
 
   return (
-    <div className='overflow-hidden pt-[80px] flex flex-col space-y-10 items-center lg:h-screen'>
+    <div className='overflow-hidden pt-[80px] flex flex-col space-y-10 items-center '>
       <h1 className='press-font text-purple text-[30px]'>FARMS</h1>
-      <div className='w-full md:w-[70%] max-w-[1300px] space-y-[40px]   '>
+      <div className='w-full md:w-[70%] max-w-[1300px]    '>
         {
           [...Array(4)].map((_ , i)=>(
             <div>

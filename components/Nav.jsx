@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { BsChevronDown, BsTwitter } from "react-icons/bs";
+import { useAccount} from "wagmi";
 import { AiOutlineClose } from "react-icons/ai";
 import { FaWallet, FaTelegramPlane } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import ConnectBtn from './btn/ConnectBtn';
 
 function Nav() {
   const [open, setIsOpen] = useState(false);
-
+  const { isConnected, address } = useAccount();
   function closeModal() {
     setIsOpen(false);
   }
@@ -25,7 +27,7 @@ function Nav() {
       <div className=' flex items-center justify-between px-[18px] fixed top-0 z-50 left-0 right-0 h-[70px] bg-black lg:px-[30px]  lg:h-[100px]'>
         <li className='hidden lg:flex text-white press-font space-x-10'>
           <Link href="/swap" >TRADE</Link>
-          <ul>EARN</ul>
+          <Link href="/farms" >EARN</Link>
         </li>
 
         <Link href="/" className='hidden lg:flex text-purple  justify-center items-center press-font space-x-[20px] '>
@@ -44,11 +46,20 @@ function Nav() {
             <p className='font-white font-bold text-white'>ARBITRUM ONE</p>
             <BsChevronDown className='text-[10px] text-white ' />
           </div>
+          {
+            isConnected ? (
+              <div className='rounded-full bg-purple/30 flex items-center p-2 space-x-2 px-5 '>
+              <FaWallet className='text-violet-400' />
+              <p className='text-white truncate w-[70px]'>{address}</p>
+            </div>
+            ): (
+              <ConnectBtn />
+            )
+          }
+         
 
-          <div className='rounded-full bg-purple/30 flex items-center p-2 space-x-2 '>
-            <FaWallet className='text-violet-400' />
-            <p className='text-white'>0X...DBDE</p>
-          </div>
+
+
         </div>
       </div>
 

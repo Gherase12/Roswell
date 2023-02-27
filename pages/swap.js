@@ -1,8 +1,11 @@
 import React from 'react'
 import { BsChevronDown } from "react-icons/bs";
 import { AiOutlineArrowDown  } from "react-icons/ai";
+import { useAccount} from "wagmi";
 import Image from "next/image";
+import ConnectBtn from './../components/btn/ConnectBtn';
 function Swap() {
+    const { isConnected, address } = useAccount();
   return (
     <div className='overflow-hidden pt-[80px] flex flex-col space-y-10 items-center h-screen' >
         <h1  className='press-font text-purple text-[30px]'>SWAP</h1>
@@ -37,10 +40,16 @@ function Swap() {
 
                 
             </div>
+            <div className='flex justify-center mt-10' >
 
-            <button className="w-[80%] flex items-center justify-center h-[40px] bg-purple press-font font-white rounded-full mx-auto mt-10 font-bold " >
-                Connect wallet
-            </button>
+            {
+                !isConnected && (
+                    <ConnectBtn />
+                ) 
+            }
+            </div>
+
+            
         </div>
     </div>
   )
