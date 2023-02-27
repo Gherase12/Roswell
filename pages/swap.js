@@ -37,6 +37,10 @@ function Swap() {
 
                 
             </div>
+
+            <button className="w-[80%] flex items-center justify-center h-[40px] bg-purple press-font font-white rounded-full mx-auto mt-10 font-bold " >
+                Connect wallet
+            </button>
         </div>
     </div>
   )
