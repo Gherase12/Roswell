@@ -36,7 +36,7 @@ export default function Home() {
 
       <section className="" >
         <p className='' >
-        Meet Roswell, the intelligent robot designed to enhance your experience in a digital ecosystem. With advanced AI, you can swap, farm, and stake coins for rewards, while playing against Roswell for incentives. Roswell's personalized interface and constant learning make it easy to stay ahead of the game. Join now and discover a new world of possibilities with Roswell as your guide.
+        Meet Roswell, the intelligent robot designed to enhance your experience in a digital ecosystem. With advanced AI, you can swap, farm, and stake coins for rewards, while playing against Roswell for incentives. Roswell&apos;s personalized interface and constant learning make it easy to stay ahead of the game. Join now and discover a new world of possibilities with Roswell as your guide.
         </p>
 
       </section>
