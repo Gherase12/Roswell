@@ -86,9 +86,12 @@ function Swap() {
 
   async function fetchPrices(one, two){
     //http://localhost:3000/api/tokenPrice
-      const res = await axios.get(`https://www.roswellaicoin.com/api/tokenPrice`, {
+      const res = await axios.get(
+        `https://www.roswellaicoin.com/api/tokenPrice`
+        // `http://localhost:3000/api/tokenPrice`
+        , {
         params: {addressOne: one, addressTwo: two}
-      })
+      }, { method: "GET" })
 
       
       setPrices(res.data)

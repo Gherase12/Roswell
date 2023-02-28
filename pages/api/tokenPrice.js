@@ -7,10 +7,18 @@ const cors = Cors({
 });
 
 export default async function handler(req, res) {
-  // Run cors middleware
   await cors(req, res);
 
-  const { query } = req;
+  const { query , method } = req;
+
+  switch (method) {
+    
+    case "GET":
+     
+
+      try {
+        // Run cors middleware
+ 
 
   const responseOne = await Moralis.EvmApi.token.getTokenPrice({
     address: query.addressOne,
@@ -27,6 +35,17 @@ export default async function handler(req, res) {
   };
 
   return res.status(200).json(usdPrices);
+
+      } catch (err) {
+        console.log(err)
+      }
+      break;
+
+    default:
+      res.setHeader("Allow", ["POST"]);
+      res.status(405).end(`Method ${method} not supported`);
+  }
+
 }
 
 const startServer = async () => {
