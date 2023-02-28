@@ -17,7 +17,7 @@ function Farms() {
       <div className='w-full md:w-[70%] max-w-[1300px]    '>
         {
           [...Array(4)].map((_ , i)=>(
-            <div>
+            <div key={i} >
 
             <div className='w-full md:h-[100px] flex flex-col md:flex-row purple-gradient space-y-5 md:space-y-0 md:justify-between p-4 md:p-0 md:items-center md:px-[30px]'>
             <div className='flex space-x-2 px-5 py-3 '>

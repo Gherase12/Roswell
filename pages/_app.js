@@ -1,7 +1,6 @@
 
 
 import { createClient, configureChains, goerli, WagmiConfig } from "wagmi";
-import "@/styles/globals.css";
 import Nav from "./../components/Nav";
 
 
@@ -10,6 +9,7 @@ import Nav from "./../components/Nav";
 import { publicProvider } from "wagmi/providers/public";
 import { SessionProvider } from "next-auth/react";
 
+import "../styles/globals.css";
 
 const { provider, webSocketProvider } = configureChains(
   [goerli],
