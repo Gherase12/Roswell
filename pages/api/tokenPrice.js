@@ -1,12 +1,14 @@
 import Moralis from "moralis";
-import Cors from "cors";
+
 
 // Initialize the cors middleware
-
+const cors = Cors({
+  methods: ["GET", "HEAD"],
+});
 
 export default async function handler(req, res) {
   // Run cors middleware
-  
+  await cors(req, res);
 
   const { query } = req;
 
