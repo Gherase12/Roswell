@@ -16,7 +16,7 @@ function Farms() {
 
 
   return (
-    <div className='overflow-hidden pt-[80px] flex flex-col space-y-10 items-center '>
+    <div className='overflow-x-hidden min-h-screen pt-[80px] flex flex-col space-y-10 items-center '>
       <h1 className='press-font text-purple text-[30px]'>FARMS</h1>
       <div className='w-full md:w-[70%] max-w-[1300px]    '>
         {
