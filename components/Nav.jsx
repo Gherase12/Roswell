@@ -8,6 +8,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import ConnectBtn from './btn/ConnectBtn';
+import { toast } from 'react-toastify';
 
 function Nav() {
   const [open, setIsOpen] = useState(false);
@@ -27,7 +28,7 @@ function Nav() {
     setNetworks([networks[1], networks[0]]);
   };
 
-  
+  const notify = () => toast.warn("Launchpad coming soon",{theme: "dark"});
 
   return (
     <>
@@ -35,6 +36,8 @@ function Nav() {
         <li className='hidden lg:flex text-white press-font space-x-10'>
           <Link href="/swap" >TRADE</Link>
           <Link href="/farms" >EARN</Link>
+          <Link href="/games" >GAMES</Link>
+          <button onClick={notify} >LAUNCHPAD</button>
         </li>
 
         <Link href="/" className='hidden lg:flex text-purple  justify-center items-center press-font space-x-[20px] '>
@@ -95,7 +98,9 @@ function Nav() {
         </div>
         <li className=' text-white press-font text-[40px] flex flex-col space-y-5 mt-20 '>
         <Link href="/swap" >TRADE</Link>
-          <ul>EARN</ul>
+        <Link href="/farms" >EARN</Link>
+        <Link href="/games" >GAMES</Link>
+        <button onClick={notify} >LAUNCHPAD</button>
         </li>
         <div className='text-purple flex text-[40px] space-x-10 mt-10'>
             <FaTelegramPlane />

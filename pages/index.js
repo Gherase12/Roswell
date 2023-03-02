@@ -3,6 +3,7 @@ import Image from "next/image";
 import { BiMicrophone } from "react-icons/bi";
 import { FaTelegramPlane } from "react-icons/fa";
 import { BsTwitter } from "react-icons/bs";
+import Link  from 'next/link';
 
 export default function Home() {
   return (
@@ -13,7 +14,7 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/logo.svg' />
       </Head>
-      <section className='h-screen relative flex flex-col items-center overflow-hidden w-full'>
+      <section className='min-h-screen relative flex flex-col items-center overflow-hidden w-full'>
         <Image
           src='/robot-lg.webp'
           fill
@@ -25,14 +26,15 @@ export default function Home() {
         </h1>
         <input
           type='text'
-          placeholder='Ask me any question... '
+          disabled={true}
+          placeholder='Coming soon '
           className='bg-purple-black w-[320px] h-[49px] rounded-full p-4 text-white z-20 lg:w-[700px] lg:mt-[300px] outline-none lg:h-[60px] '
         />
         <button className='rounded-full w-[70px] h-[70px] bg-violet-700/25 flex items-center justify-center  my-[30px] z-20'>
           <BiMicrophone className='text-white text-[30px]  ' />
         </button>
         <Image
-          src={"/robot-sm.webp"}
+          src={"/robot-sm.png"}
           width={300}
           height={300}
           className='lg:hidden'
@@ -58,7 +60,7 @@ export default function Home() {
             </button>
           </div>
           <div className='w-[334px]  h-[356px]  xl:h-[443px] xl:w-[443px] relative mx-auto  '>
-            <Image src='/drone.webp' className='object-contain' fill />
+            <Image src='/drone.png' className='object-contain' fill />
           </div>
         </div>
       </section>
@@ -81,19 +83,24 @@ export default function Home() {
           <h2 className='text-white/60 text-center font-bold text-xl px-5 md:text-[30px] xl:text-[40px] '>
             Roswell Ai provides safe & low-cost trading experience
           </h2>
-          <div className='flex flex-col items-center  md:space-x-10  md:flex-row  lg:mt-[91px]'>
+          <Link href="https://roswells-ai.gitbook.io/roswell.ai/" target="_blank" className='flex flex-col items-center  md:space-x-10  md:flex-row  lg:mt-[91px]'>
             <button className='animate-pulse font-bold text-purple flex items-center bg-purple-black mx-auto  my-10 justify-center w-[155px] h-[55px] rounded-full'>
               LEARN NOW
             </button>
-            <p className='text-white font-bold text-xl'>Learn</p>
-          </div>
+          </Link>
         </div>
 
         <div className='flex flex-col lg:flex-row w-full lg:justify-between lg:px-[30px]  items-center mt-[50px] '>
           {/*  */}
           <div className='text-purple flex text-[40px] space-x-10'>
-            <FaTelegramPlane />
-            <BsTwitter />
+           <Link href="https://twitter.com/roswellaidex" target="_blank" >
+           <BsTwitter />
+           
+           </Link> 
+
+           <Link href="https://t.me/Roswellai" target="_blank">
+           <FaTelegramPlane />
+           </Link>
           </div>
 
           {/*  */}
@@ -103,7 +110,7 @@ export default function Home() {
           </div>
           {/*  */}
           <p className='text-white font-bold press-font my-10'>
-            contact@figmafiles.com
+              roswellAI@proton.me
           </p>
         </div>
       </footer>
