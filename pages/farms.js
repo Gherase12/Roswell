@@ -1,5 +1,7 @@
 import React , {useState} from "react";
 import Image from "next/image";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { MdVerified } from "react-icons/md";
 import { IoIosArrowUp } from "react-icons/io";
 import { motion } from 'framer-motion';
@@ -7,8 +9,10 @@ function Farms() {
   const [open, setIsOpen] = useState();
   const dropdownVariants = {
     closed: { height: 0, opacity: 0 },
-    open: { height: "auto", opacity: 0.4 },
+    open: { height: "auto", opacity: 1 },
   };
+
+  const notify = () => toast.warn("Farm coming soon",{theme: "dark"});
 
 
   return (
@@ -22,7 +26,8 @@ function Farms() {
             <div className='w-full md:h-[100px] flex flex-col md:flex-row purple-gradient space-y-5 md:space-y-0 md:justify-between p-4 md:p-0 md:items-center md:px-[30px]'>
             <div className='flex space-x-2 px-5 py-3 '>
               <Image src='/eth.png' width={30} height={30} />
-              <Image src='/avee.png' width={30} height={30} />
+              <div className="w-[30px] h-[30px] rounded-full flex items-center justify-center bg-black text-white font-bold" >?</div>
+              {/* <Image src='/avee.png' width={30} height={30} /> */}
             </div>
   
             <div className='flex  justify-between md:space-x-[40px] '>
@@ -38,19 +43,19 @@ function Farms() {
   
               <div className='flex flex-col items-center  font-bold '>
                 <p className="text-white/60" >APR</p>
-                <p className="text-white" >617.31%</p>
+                <p className="text-white" >?%</p>
               </div>
             </div>
   
             <div className="flex items-center justify-between md:space-x-[30px] " >
             <div className='flex flex-col items-center  font-bold '>
                 <p className="text-white/60" >LIQUIDITY</p>
-                <p className="text-white" >$564.094</p>
+                <p className="text-white" >?</p>
               </div>
   
             <div className='flex flex-col items-center  font-bold '>
                 <p className="text-white/60" >MULTIPLIER</p>
-                <p className="text-white" >30X</p>
+                <p className="text-white" >?X</p>
               </div>
   
               <IoIosArrowUp onClick={()=> open == i ? setIsOpen("ana") : setIsOpen(i)} className={`text-purple ${open == i && "rotate-180" } transition duration-100  text-[25px] `} />
@@ -61,19 +66,30 @@ function Farms() {
           animate={open == i ? "open" : "closed"}
           variants={dropdownVariants}
           transition={{ duration: 0.5 }}
-          className="w-full  flex flex-col md:flex-row justify-around border-2 border-purple p-10 ">
-              <ul>
-                <li>GET USDC ALIEN LP</li>
+          className="w-full  flex flex-col md:flex-row justify-around border-2 border-purple p-10 text-white">
+              <ul className="text-white space-y-[10px] font-bold ">
+                <li>GET USDC ROSWELL LP</li>
                 <li>VIEW CONTRACT</li>
                 <li>SEE PAIR INFO</li>
               </ul>
 
-              <div className="border-2 border-purple w-[420px] h-[100px] " >
-              <p>Alien earned</p>
+              <div className="border-2 border-purple w-[420px] h-[100px] flex justify-around items-center " >
+                <div className="flex flex-col items-center font-bold " >
+              <p>Roswell earned</p>
+                <p>0</p>
+                </div>
+              <button disabled={true} className="bg-purple opacity-30 px-7 py-4 font-bold " >
+                HARVEST
+              </button>
               </div>
 
-              <div className="border-2 border-purple w-[400px] h-[100px] " >
-              <p>Alien earned</p>
+              <div className="border-2 border-purple w-[400px] h-[100px] px-10 flex flex-col justify-center " >
+              <p className="font-bold  ">
+                ENABLE FARM
+              </p>
+              <button onClick={notify} className="bg-purple flex justify-center px-7 py-4 font-bold w-[100px] text-center " >
+              ENABLE
+              </button>
               </div>
           </motion.div>
             </div>

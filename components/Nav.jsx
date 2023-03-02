@@ -11,7 +11,9 @@ import ConnectBtn from './btn/ConnectBtn';
 
 function Nav() {
   const [open, setIsOpen] = useState(false);
+  const [show, setShow] = useState(false);
   const { isConnected, address } = useAccount();
+  const [networks, setNetworks] = useState([{id:0, name: "ARBITRUM", img:"/arbitrum-logo.svg"},{id:1, name:"ETHEREUM", img:'/ethereum.png'}])
   function closeModal() {
     setIsOpen(false);
   }
@@ -20,7 +22,12 @@ function Nav() {
     setIsOpen(true);
   }
 
-  const router = useRouter();
+  
+  const reverseObjects = () => {
+    setNetworks([networks[1], networks[0]]);
+  };
+
+  
 
   return (
     <>
@@ -41,10 +48,17 @@ function Nav() {
           className='text-white text-[30px] mr-2 lg:hidden'
         />
         <div className=' hidden lg:flex space-x-5 '>
-          <div className='rounded-full bg-purple/30 flex items-center p-2 space-x-2 '>
-            <Image src='/arbitrum-logo.svg' width={20} height={20} />
-            <p className='font-white font-bold text-white'>ARBITRUM ONE</p>
+          <div onMouseEnter={() =>setShow(true)} onMouseLeave={()=>setShow(false)} className='relative rounded-full bg-purple/30 flex items-center p-2 space-x-2 '>
+            <Image src={networks[0].img} width={20} height={20} />
+            <p className='font-white font-bold text-white'>{networks[0].name}</p>
             <BsChevronDown className='text-[10px] text-white ' />
+            {show && (
+
+            <div onClick={reverseObjects} className="absolute cursor-pointer hover:bg-purple w-[150px] left-0 -bottom-[100%] rounded-full bg-purple/30 flex items-center p-2 space-x-2" >
+            <Image src={networks[1].img} width={20} height={20} />
+            <p className='font-white font-bold text-white'> {networks[1].name}</p>
+            </div>
+            ) }
           </div>
           {
             isConnected ? (
