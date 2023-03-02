@@ -57,7 +57,7 @@ function Nav() {
             <BsChevronDown className='text-[10px] text-white ' />
             {show && (
 
-            <div onClick={reverseObjects} className="absolute cursor-pointer hover:bg-purple w-[150px] left-0 -bottom-[100%] rounded-full bg-purple/30 flex items-center p-2 space-x-2" >
+            <div onClick={reverseObjects} className="absolute cursor-pointer hover:bg-purple w-[150px] -left-[10px] -bottom-[100%] rounded-full bg-purple/30 flex items-center p-2 space-x-2" >
             <Image src={networks[1].img} width={20} height={20} />
             <p className='font-white font-bold text-white'> {networks[1].name}</p>
             </div>

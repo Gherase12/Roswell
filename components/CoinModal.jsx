@@ -62,7 +62,7 @@ function CoinModal({ closeModal,modifyToken, isOpen, setCoin, coin, index }) {
                 </h3>
 
                 {!coinAddress ? (
-                  <div className='w-[80%]  border-2 border-purple max-h-[400px] overflow-y-scroll '>
+                  <div className='w-[80%]  border-2 border-purple max-h-[400px] overflow-y-scroll scrollbar-hide '>
                     {tokenList.map(({ ticker, img }, i) => (
                       <div
                         key={i}

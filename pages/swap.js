@@ -10,6 +10,7 @@ import { Input, Popover, Radio, Modal, message } from "antd";
 import axios from "axios";
 import SwapBord from "../components/SwapBord";
 import { tokenList } from './../data/tokenList';
+import { toast } from 'react-toastify';
 function Swap() {
 
   const { isConnected, address } = useAccount();
@@ -28,6 +29,8 @@ function Swap() {
     data: null,
     value: null,
   }); 
+
+  const notify = () => toast.warn("Swap coming soon",{theme: "dark"});
 
   const {data, sendTransaction} = useSendTransaction({
     request: {
@@ -205,7 +208,11 @@ function Swap() {
           </div>
         </div> */}
         <div className='flex justify-center mt-10'>
-          {!isConnected && <ConnectBtn />}
+          {!isConnected ? <ConnectBtn /> : (
+            <button onClick={notify} className="rounded-full bg-purple/30 flex items-center p-2 space-x-2 px-5 text-white font-bold" >
+                  Swap
+            </button>
+          )}
         </div>
       </div>
 

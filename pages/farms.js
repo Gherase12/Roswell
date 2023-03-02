@@ -67,7 +67,7 @@ function Farms() {
           variants={dropdownVariants}
           transition={{ duration: 0.5 }}
           className="w-full  flex flex-col md:flex-row justify-around border-2 border-purple p-10 text-white">
-              <ul className="text-white text-[12px] border-2 flex flex-col justify-around space-y-[10px] font-bold ">
+              <ul className="text-white text-[12px]  flex flex-col justify-around space-y-[10px] font-bold ">
                 <li>GET USDC ROSWELL LP</li>
                 <li>VIEW CONTRACT</li>
                 <li>SEE PAIR INFO</li>
@@ -83,7 +83,7 @@ function Farms() {
               </button>
               </div>
 
-              <div className="border-2 border-purple w-[400px] h-[100px] px-10 flex flex-col justify-center " >
+              <div className="border-2 border-purple w-[400px] h-[100px] px-10 flex items-center  justify-between " >
               <p className="font-bold  ">
                 ENABLE FARM
               </p>
