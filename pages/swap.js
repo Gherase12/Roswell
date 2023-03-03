@@ -1,17 +1,18 @@
 import React, {useState, useEffect} from "react";
-import { BsChevronDown } from "react-icons/bs";
-import { useSendTransaction, useWaitForTransaction } from "wagmi";
-import { AiOutlineArrowDown } from "react-icons/ai";
+import { useQuery } from 'react-query';
+import {  useSendTransaction, useWaitForTransaction } from "wagmi";
 import { useAccount } from "wagmi";
-import Image from "next/image";
+import axios  from 'axios';
 import ConnectBtn from "./../components/btn/ConnectBtn";
-import CoinModal from './../components/CoinModal';
 import { Input, Popover, Radio, Modal, message } from "antd";
-import axios from "axios";
 import SwapBord from "../components/SwapBord";
 import { tokenList } from './../data/tokenList';
 import { toast } from 'react-toastify';
 import Slippage from './../components/Slippage';
+import { fetchPrices } from './../fetchers/getPrices';
+import { Atokens } from './../data/arbitrumTokens';
+
+
 function Swap() {
 
   const { isConnected, address } = useAccount();
@@ -20,8 +21,8 @@ function Swap() {
   const [slippage, setSlippage] = useState(2.5);
   const [tokenOneAmount, setTokenOneAmount] = useState(0);
   const [tokenTwoAmount, setTokenTwoAmount] = useState(0);
-  const [tokenOne, setTokenOne] = useState(tokenList[0]);
-  const [tokenTwo, setTokenTwo] = useState(tokenList[1]);
+  const [tokenOne, setTokenOne] = useState(Atokens[0]);
+  const [tokenTwo, setTokenTwo] = useState(Atokens[1]);
   const [isOpen, setIsOpen] = useState(false);
   const [changeToken, setChangeToken] = useState(1);
   const [prices, setPrices] = useState(null);
@@ -30,6 +31,13 @@ function Swap() {
     data: null,
     value: null,
   }); 
+
+  const { data:priceData,  isError, refetch } = useQuery(["priceData", tokenOneAmount], () => fetchPrices(tokenOneAmount,tokenOne.address,tokenTwo.address ,tokenOne.decimals),{ cacheTime: 0,onSuccess: (data) => {
+    setTokenTwoAmount((Number(data.price) / (10 ** tokenTwo.decimals)).toFixed(2));
+  }});
+  // set(priceData)
+  // setTokenTwoAmount((Number(priceData?.price) / (10 ** tokenTwo.decimals)))
+
 
   const notify = () => toast.warn("Swap coming soon",{theme: "dark"});
 
@@ -48,20 +56,20 @@ function Swap() {
 
   function handleSlippageChange(e) {
     setSlippage(Number(e.target.value));
-    console.log(e.target.value)
   }
 
   function changeAmount(e) {
+    console.log(e.target.value)
     setTokenOneAmount(e.target.value);
-    if(e.target.value && prices){
-      setTokenTwoAmount((e.target.value * prices.ratio).toFixed(2))
+    if(e.target.value){
+      setTokenTwoAmount((Number(priceData?.price) / (10 ** tokenTwo.decimals)))
     }else{
-      setTokenTwoAmount(null);
+      setTokenTwoAmount(0);
     }
   }
 
   function switchTokens() {
-    setPrices(null);
+    // setPrices(null);
     const tokenOneAmountPrev = tokenOneAmount
     setTokenOneAmount(tokenTwoAmount);
     setTokenTwoAmount(tokenOneAmountPrev);
@@ -69,38 +77,38 @@ function Swap() {
     const two = tokenTwo;
     setTokenOne(two);
     setTokenTwo(one);
-    fetchPrices(two.address, one.address);
+    // fetchPrices(two.address, one.address);
   }
 
   
 
-  function modifyToken(i, index){
+  // function modifyToken(i, index){
     
 
-    if(index == 0 ){
-      // setTokenOneAmount(prices.to);
-      fetchPrices(tokenList[i].address, tokenTwo.address)
-    } else {
-      // setTokenTwo(tokenList[i]);
-      fetchPrices(tokenOne.address, tokenList[i].address)
-    }
-    setTokenOneAmount(0)
-    setTokenTwoAmount(0)
-    console.log(prices)
-  }
+  //   if(index == 0 ){
+  //     // setTokenOneAmount(prices.to);
+  //     fetchPrices(tokenList[i].address, tokenTwo.address)
+  //   } else {
+  //     // setTokenTwo(tokenList[i]);
+  //     fetchPrices(tokenOne.address, tokenList[i].address)
+  //   }
+  //   setTokenOneAmount(0)
+  //   setTokenTwoAmount(0)
+  //   console.log(prices)
+  // }
 
-  async function fetchPrices(one, two){
-    //http://localhost:3000/api/tokenPrice
-      const res = await axios.get(
-        // `https://www.roswellaicoin.com/api/tokenPrice`
-        `http://localhost:3000/api/tokenPrice`
-        , {
-        params: {addressOne: one, addressTwo: two}
-      }, { method: "GET" })
+  // async function fetchPrices(one, two){
+  //   //http://localhost:3000/api/tokenPrice
+  //     const res = await axios.get(
+  //       // `https://www.roswellaicoin.com/api/tokenPrice`
+  //       `http://localhost:3000/api/tokenPrice`
+  //       , {
+  //       params: {addressOne: one, addressTwo: two}
+  //     }, { method: "GET" })
 
       
-      setPrices(res.data)
-  }
+  //     setPrices(res.data)
+  // }
 
   async function fetchDexSwap(){
 
@@ -128,11 +136,11 @@ function Swap() {
   }
 
 
-  useEffect(()=>{
+  // useEffect(()=>{
 
-    fetchPrices(tokenList[0].address, tokenList[1].address)
+  //   fetchPrices(tokenList[0].address, tokenList[1].address)
 
-  }, [])
+  // }, [])
 
   useEffect(()=>{
 
@@ -187,31 +195,14 @@ function Swap() {
         <div>
           <p className="text-white font-bold font-press mb-2">Slippage Tolerance:</p>
           <Slippage slippage={slippage} handleSlippageChange={handleSlippageChange} />
-          {/* <Radio.Group className="text-white  border-purple font-bold" value={slippage} onChange={handleSlippageChange}   >
-          <Radio.Button className="bg-black border-purple text-purple  " value={0.5}>0.5%</Radio.Button>
-          <Radio.Button className="bg-black border-purple text-purple  " value={2.5}>2.5%</Radio.Button>
-          <Radio.Button className="bg-black border-purple text-purple  " value={5}>5.0%</Radio.Button>
-        </Radio.Group> */}
+          
         </div>
-        <SwapBord prices={prices} coin={tokenOne} setCoin={setTokenOne} modifyToken={modifyToken} switchTokens={switchTokens} tokenAmount={tokenOneAmount} changeAmount={changeAmount} index={0} disabled={!prices} />
-        <SwapBord  prices={prices} coin={tokenTwo} setCoin={setTokenTwo} modifyToken={modifyToken} switchTokens={switchTokens} tokenAmount={tokenTwoAmount} changeAmount={changeAmount} index={1} disabled={true} />
+        <SwapBord refetch={refetch} prices={prices} coin={tokenOne} setCoin={setTokenOne}  switchTokens={switchTokens} tokenAmount={tokenOneAmount} changeAmount={changeAmount} index={0} disabled={false}  />
+        <SwapBord  isError={ isError} refetch={refetch} prices={prices} coin={tokenTwo} setCoin={setTokenTwo} switchTokens={switchTokens} tokenAmount={tokenTwoAmount} changeAmount={changeAmount} index={1} disabled={true} />
 
-        {/* <div className='relative mt-10 '>
-          <input
-            type='number'
-            placeholder='0'
-            className='w-full h-[180px] pb-[100px] md:pb-0 md:h-[100px] border-2 border-purple bg-black rounded-[30px] p-4 text-white press-font text-[25px] outline-none '
-          />
-
-          <div className='absolute right-[20px] bottom-[30px] text-white press-font flex rounded-full items-center bg-purple p-2 space-x-2 '>
-            <Image src='/avee.png' width={20} height={20} className='' />
-
-            <p>AVEE</p>
-            <BsChevronDown />
-          </div>
-        </div> */}
+        
         <div className='flex justify-center mt-10'>
-          {!isConnected ? <ConnectBtn /> : (
+          {isConnected ? <ConnectBtn /> : (
             <button onClick={notify} className="rounded-full bg-purple/30 flex items-center p-2 space-x-2 px-5 text-white font-bold" >
                   Swap
             </button>

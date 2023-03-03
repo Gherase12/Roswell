@@ -4,14 +4,15 @@ import { tokenList } from "./../data/tokenList";
 import Image from "next/image";
 import Moralis from "moralis";
 import { EvmChain } from "@moralisweb3/evm-utils";
+import { Atokens } from './../data/arbitrumTokens';
 
-function CoinModal({ closeModal,modifyToken, isOpen, setCoin, coin, index }) {
+function CoinModal({ closeModal,refetch, isOpen, setCoin, coin, index }) {
   const [coinAddress, setCoinAddress] = useState();
-//   const [serachCoin, setSearchCoin] = useState();
+
 
   const handleClick = (i) => {
-    setCoin(tokenList[i]);
-    modifyToken(i)
+    setCoin(Atokens[i]);
+    refetch()
     closeModal();
   };
 
@@ -50,9 +51,9 @@ function CoinModal({ closeModal,modifyToken, isOpen, setCoin, coin, index }) {
                   Select a Token{" "}
                 </h2>
                 <input
-                  // onChange={(e)=> setCoinAddress(e.target.value)}
+                  
                   onChange={(e) => getCoin()}
-                  // onChange={ }
+                  
                   type='text'
                   placeholder='Search name or paste address '
                   className='bg-purple-black my-[30px] w-[300px]  h-[49px] rounded-full p-4 text-white z-20   outline-none border-2 border-purple'
@@ -63,19 +64,19 @@ function CoinModal({ closeModal,modifyToken, isOpen, setCoin, coin, index }) {
 
                 {!coinAddress ? (
                   <div className='w-[80%]  border-2 border-purple max-h-[400px] overflow-y-scroll scrollbar-hide '>
-                    {tokenList.map(({ ticker, img }, i) => (
+                    {Atokens.map(({ symbol, logoURI }, i) => (
                       <div
                         key={i}
                         onClick={() => handleClick(i, index)}
-                        className={` ${ticker == coin.ticker && "hidden"} w-full h-[50px] border-2 border-purple hover:bg-purple cursor-pointer  flex pl-5 space-x-5 press-font items-center`}
+                        className={` ${symbol == coin.symbol && "hidden"} w-full h-[50px] border-2 border-purple hover:bg-purple cursor-pointer  flex pl-5 space-x-5 press-font items-center`}
                       >
                         <Image
-                          src={img}
+                          src={logoURI}
                           width={30}
                           height={30}
                           className='rounded-full'
                         />
-                        <p className='text-white font-bold '>{ticker}</p>
+                        <p className='text-white font-bold '>{symbol}</p>
                       </div>
                     ))}
                   </div>
