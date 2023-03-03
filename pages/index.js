@@ -3,12 +3,11 @@ import Image from "next/image";
 import { BiMicrophone } from "react-icons/bi";
 import { FaTelegramPlane } from "react-icons/fa";
 import { BsTwitter } from "react-icons/bs";
-import Link  from 'next/link';
-import {  toast } from 'react-toastify';
+import Link from "next/link";
+import { toast } from "react-toastify";
 
 export default function Home() {
-
-  const notify = () => toast.warn("Coming soon",{theme: "dark"});
+  const notify = () => toast.warn("Coming soon", { theme: "dark" });
   return (
     <div className='overflow-hidden'>
       <Head>
@@ -33,7 +32,10 @@ export default function Home() {
           placeholder='Coming soon '
           className='bg-purple-black w-[320px] h-[49px] rounded-full p-4 text-white z-20 lg:w-[700px] lg:mt-[300px] outline-none lg:h-[60px] '
         />
-        <button onClick={notify} className='rounded-full w-[70px] h-[70px] bg-violet-700/25 flex items-center justify-center  my-[30px] z-20'>
+        <button
+          onClick={notify}
+          className='rounded-full w-[70px] h-[70px] bg-violet-700/25 flex items-center justify-center  my-[30px] z-20'
+        >
           <BiMicrophone className='text-white text-[30px]  ' />
         </button>
         <Image
@@ -51,14 +53,39 @@ export default function Home() {
           <div className='flex flex-col items-center lg:justify-center lg:items-start  '>
             <p className='text-white/60 font-bold px-[42px] text-[20px] max-w-[656px]'>
               Meet Roswell, the intelligent robot designed to enhance your
-              experience in a digital ecosystem. With advanced AI, you can swap,
-              farm, and stake coins for rewards, while playing against Roswell
-              for incentives. Roswell&apos;s personalized interface and constant
+              experience in a digital ecosystem. Powered by Arbitirum will be
+              the most powerful Dex with advanced AI, you can swap, farm, and
+              stake coins for rewards, while playing against Roswell for
+              incentives. Roswell&apos;s personalized interface and constant
               learning make it easy to stay ahead of the game. Join now and
               discover a new world of possibilities with Roswell as your guide.
             </p>
 
-            <button className='animate-pulse text-purple font-bold flex items-center bg-purple-black mx-auto lg:mx-[42px] my-10 justify-center w-[155px] h-[55px] rounded-full'>
+            <button onClick={notify} className='animate-pulse text-purple font-bold flex items-center bg-purple-black mx-auto lg:mx-[42px] my-10 justify-center w-[155px] h-[55px] rounded-full'>
+              Join The Quest
+            </button>
+          </div>
+          <div className='w-[334px]  h-[356px]  xl:h-[443px] xl:w-[443px] relative mx-auto  '>
+            <Image src='/drone.png' className='object-contain' fill />
+          </div>
+        </div>
+
+        {/* 2nd */}
+        <div className='lg:flex lg:flex-row-reverse '>
+          <div className='flex flex-col items-center lg:justify-center lg:items-start  '>
+            <p className='text-white/60 font-bold px-[42px] text-[20px] max-w-[656px]'>
+              This Roswell robot will help us to enjoy the AI crypto ecosystem
+              much easier. We will swap, farm and play with Roswell.
+              <br /> <br /> -Trade
+              <br />
+              -Play games (Earn rewards)
+              <br />
+              -Launchpad (Tier 1 projects)
+              <br />
+              -NFT marketplace (trade NFTS incredibly low fees)
+            </p>
+
+            <button onClick={notify} className='animate-pulse text-purple font-bold flex items-center bg-purple-black mx-auto lg:mx-[42px] my-10 justify-center w-[155px] h-[55px] rounded-full'>
               Join The Quest
             </button>
           </div>
@@ -86,7 +113,11 @@ export default function Home() {
           <h2 className='text-white/60 text-center font-bold text-xl px-5 md:text-[30px] xl:text-[40px] '>
             Roswell Ai provides safe & low-cost trading experience
           </h2>
-          <Link href="https://roswells-ai.gitbook.io/roswell.ai/" target="_blank" className='flex flex-col items-center  md:space-x-10  md:flex-row  lg:mt-[91px]'>
+          <Link
+            href='https://roswells-ai.gitbook.io/roswell.ai/'
+            target='_blank'
+            className='flex flex-col items-center  md:space-x-10  md:flex-row  lg:mt-[91px]'
+          >
             <button className='animate-pulse font-bold text-purple flex items-center bg-purple-black mx-auto  my-10 justify-center w-[155px] h-[55px] rounded-full'>
               LEARN NOW
             </button>
@@ -96,14 +127,13 @@ export default function Home() {
         <div className='flex flex-col lg:flex-row w-full lg:justify-between lg:px-[30px]  items-center mt-[50px] '>
           {/*  */}
           <div className='text-purple flex text-[40px] space-x-10'>
-           <Link href="https://twitter.com/roswellaidex" target="_blank" >
-           <BsTwitter />
-           
-           </Link> 
+            <Link href='https://twitter.com/roswellaidex' target='_blank'>
+              <BsTwitter />
+            </Link>
 
-           <Link href="https://t.me/Roswellai" target="_blank">
-           <FaTelegramPlane />
-           </Link>
+            <Link href='https://t.me/Roswellai' target='_blank'>
+              <FaTelegramPlane />
+            </Link>
           </div>
 
           {/*  */}
@@ -112,7 +142,6 @@ export default function Home() {
             <p className='text-purple text-[20px]'>ROSWELL</p>
           </div>
           {/*  */}
-          
         </div>
       </footer>
     </div>

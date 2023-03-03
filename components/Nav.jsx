@@ -12,9 +12,8 @@ import { toast } from 'react-toastify';
 
 function Nav() {
   const [open, setIsOpen] = useState(false);
-  const [show, setShow] = useState(false);
+  
   const { isConnected, address } = useAccount();
-  const [networks, setNetworks] = useState([{id:0, name: "ARBITRUM", img:"/arbitrum-logo.svg"},{id:1, name:"ETHEREUM", img:'/ethereum.png'}])
   function closeModal() {
     setIsOpen(false);
   }
@@ -32,36 +31,34 @@ function Nav() {
 
   return (
     <>
-      <div className=' flex items-center justify-between px-[18px] fixed top-0 z-50 left-0 right-0 h-[70px] bg-black lg:px-[30px]  lg:h-[100px]'>
-        <li className='hidden lg:flex text-white press-font space-x-10'>
+      <div className=' flex items-center justify-between lg:justify-around px-[18px] fixed top-0 z-50 left-0 right-0 h-[70px] bg-black lg:px-[30px]  lg:h-[100px]'>
+      <Link href="/" className='hidden lg:flex text-purple  justify-center items-center press-font space-x-[20px]  '>
+          <Image src='logo.svg' width={90} height={117} />
+          <p className='text-purple text-[20px]'>ROSWELL</p>
+        </Link>
+
+
+        <li className='hidden lg:flex text-white press-font space-x-10 '>
+          <Link href="/" >HOME</Link>
           <Link href="/swap" >TRADE</Link>
           <Link href="/farms" >EARN</Link>
           <Link href="/games" >GAMES</Link>
           <button onClick={notify} >LAUNCHPAD</button>
         </li>
 
-        <Link href="/" className='hidden lg:flex text-purple  justify-center items-center press-font space-x-[20px] '>
-          <Image src='logo.svg' width={90} height={117} />
-          <p className='text-purple text-[20px]'>ROSWELL</p>
+        
+        <Link className='lg:hidden' href="/" >
+        <Image src='/logo.svg' width={64} height={64} />
         </Link>
-
-        <Image src='/logo.svg' width={64} height={64} className='lg:hidden' />
         <RxHamburgerMenu
           onClick={openModal}
           className='text-white text-[30px] mr-2 lg:hidden'
         />
-        <div className=' hidden lg:flex space-x-5 '>
-          <div onMouseEnter={() =>setShow(true)} onMouseLeave={()=>setShow(false)} className='relative rounded-full bg-purple/30 flex items-center p-2 space-x-2 '>
-            <Image src={networks[0].img} width={20} height={20} />
-            <p className='font-white font-bold text-white'>{networks[0].name}</p>
-            <BsChevronDown className='text-[10px] text-white ' />
-            {show && (
-
-            <div onClick={reverseObjects} className="absolute cursor-pointer hover:bg-purple w-[150px] -left-[10px] -bottom-[100%] rounded-full bg-purple/30 flex items-center p-2 space-x-2" >
-            <Image src={networks[1].img} width={20} height={20} />
-            <p className='font-white font-bold text-white'> {networks[1].name}</p>
-            </div>
-            ) }
+        <div className=' hidden lg:flex space-x-5  '>
+          <div  className='relative rounded-full bg-purple/30 flex items-center p-2 space-x-2 px-3 '>
+            <Image src={"/arbitrum-logo.svg"} width={20} height={20} />
+            <p className='font-white font-bold text-white'>ARBITRUM</p>
+            
           </div>
           {
             isConnected ? (
@@ -97,9 +94,9 @@ function Nav() {
           <p className='text-purple text-[20px]'>ROSWELL</p>
         </div>
         <li className=' text-white press-font text-[40px] flex flex-col space-y-5 mt-20 '>
-        <Link href="/swap" >TRADE</Link>
-        <Link href="/farms" >EARN</Link>
-        <Link href="/games" >GAMES</Link>
+        <Link href="/swap" onClick={closeModal} >TRADE</Link>
+        <Link href="/farms" onClick={closeModal} >EARN</Link>
+        <Link href="/games" onClick={closeModal} >GAMES</Link>
         <button onClick={notify} >LAUNCHPAD</button>
         </li>
         <div className='text-purple flex text-[40px] space-x-10 mt-10'>
