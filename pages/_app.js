@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }) {
     <QueryClientProvider client={queryClient}>
     <WagmiConfig client={client}>
     <SessionProvider session={pageProps.session} refetchInterval={0}>
-        <div className='pt-[70px] bg-black'>
+        <div className='pt-[70px] bg-black overflow-x-hidden'>
         <ToastContainer />
           <Nav />
           <Component {...pageProps} />

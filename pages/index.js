@@ -4,8 +4,11 @@ import { BiMicrophone } from "react-icons/bi";
 import { FaTelegramPlane } from "react-icons/fa";
 import { BsTwitter } from "react-icons/bs";
 import Link  from 'next/link';
+import {  toast } from 'react-toastify';
 
 export default function Home() {
+
+  const notify = () => toast.warn("Coming soon",{theme: "dark"});
   return (
     <div className='overflow-hidden'>
       <Head>
@@ -30,11 +33,11 @@ export default function Home() {
           placeholder='Coming soon '
           className='bg-purple-black w-[320px] h-[49px] rounded-full p-4 text-white z-20 lg:w-[700px] lg:mt-[300px] outline-none lg:h-[60px] '
         />
-        <button className='rounded-full w-[70px] h-[70px] bg-violet-700/25 flex items-center justify-center  my-[30px] z-20'>
+        <button onClick={notify} className='rounded-full w-[70px] h-[70px] bg-violet-700/25 flex items-center justify-center  my-[30px] z-20'>
           <BiMicrophone className='text-white text-[30px]  ' />
         </button>
         <Image
-          src={"/robot-sm.png"}
+          src={"/robot-sm.webp"}
           width={300}
           height={300}
           className='lg:hidden'
@@ -109,9 +112,7 @@ export default function Home() {
             <p className='text-purple text-[20px]'>ROSWELL</p>
           </div>
           {/*  */}
-          <p className='text-white font-bold press-font my-10'>
-              roswellAI@proton.me
-          </p>
+          
         </div>
       </footer>
     </div>
