@@ -11,6 +11,7 @@ import axios from "axios";
 import SwapBord from "../components/SwapBord";
 import { tokenList } from './../data/tokenList';
 import { toast } from 'react-toastify';
+import Slippage from './../components/Slippage';
 function Swap() {
 
   const { isConnected, address } = useAccount();
@@ -46,7 +47,8 @@ function Swap() {
   })
 
   function handleSlippageChange(e) {
-    setSlippage(e.target.value);
+    setSlippage(Number(e.target.value));
+    console.log(e.target.value)
   }
 
   function changeAmount(e) {
@@ -184,11 +186,12 @@ function Swap() {
       <div className='w-[80%]  border-2 border-purple max-w-[500px] space-y-10 rounded-[30px] p-8'>
         <div>
           <p className="text-white font-bold font-press mb-2">Slippage Tolerance:</p>
-          <Radio.Group className="text-white  border-purple font-bold" value={slippage} onChange={handleSlippageChange}   >
+          <Slippage slippage={slippage} handleSlippageChange={handleSlippageChange} />
+          {/* <Radio.Group className="text-white  border-purple font-bold" value={slippage} onChange={handleSlippageChange}   >
           <Radio.Button className="bg-black border-purple text-purple  " value={0.5}>0.5%</Radio.Button>
           <Radio.Button className="bg-black border-purple text-purple  " value={2.5}>2.5%</Radio.Button>
           <Radio.Button className="bg-black border-purple text-purple  " value={5}>5.0%</Radio.Button>
-        </Radio.Group>
+        </Radio.Group> */}
         </div>
         <SwapBord prices={prices} coin={tokenOne} setCoin={setTokenOne} modifyToken={modifyToken} switchTokens={switchTokens} tokenAmount={tokenOneAmount} changeAmount={changeAmount} index={0} disabled={!prices} />
         <SwapBord  prices={prices} coin={tokenTwo} setCoin={setTokenTwo} modifyToken={modifyToken} switchTokens={switchTokens} tokenAmount={tokenTwoAmount} changeAmount={changeAmount} index={1} disabled={true} />
