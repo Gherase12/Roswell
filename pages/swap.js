@@ -180,7 +180,7 @@ function Swap() {
 
         
         <div className='flex justify-center mt-10'>
-          {isConnected ? <ConnectBtn /> : (
+          {!isConnected ? <ConnectBtn /> : (
             <button disabled={!tokenOneAmount} onClick={fetchDexSwap} className="rounded-full bg-purple/30 flex items-center p-2 space-x-2 px-5 text-white font-bold" >
                   Swap
             </button>

@@ -5,6 +5,7 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { BsTwitter } from "react-icons/bs";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import Roadmap from './../components/Roadmap';
 
 export default function Home() {
   const notify = () => toast.warn("Coming soon", { theme: "dark" });
@@ -96,18 +97,10 @@ export default function Home() {
         </div>
       </section>
 
+      <Roadmap />
+
       {/* card section */}
-      {/* <section className=''>
-        <div className='border-2 w-[800px] h-[200px] relative mx-auto '>
-          {[...Array(4)].map((_, i) => (
-            <div
-              className={`w-[100px]  h-[200px] rounded-lg  absolute ${`left-${
-                i + 1
-              }00px`} `}
-            ></div>
-          ))}
-        </div>
-      </section> */}
+     
 
       <section>
 
@@ -115,9 +108,9 @@ export default function Home() {
 
       <footer className='flex flex-col mt-[50px]  '>
         <div className=' flex flex-col items-center'>
-          <h2 className='text-white/60 text-center font-bold text-xl px-5 md:text-[30px] xl:text-[40px] '>
+          {/* <h2 className='text-white/60 text-center font-bold text-xl px-5 md:text-[30px] xl:text-[40px] '>
             Roswell Ai provides safe & low-cost trading experience
-          </h2>
+          </h2> */}
           <Link
             href='https://roswells-ai.gitbook.io/roswell.ai/'
             target='_blank'

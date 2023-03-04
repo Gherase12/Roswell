@@ -1,7 +1,7 @@
 import React from 'react'
 import Image  from 'next/image';
 import {  toast } from 'react-toastify';
-function GameCard({name , i}) {
+function GameCard({name, desc , i}) {
     const notify = () => toast.warn("Games coming soon",{theme: "dark"});
 
   return (
@@ -12,7 +12,7 @@ function GameCard({name , i}) {
 
             <h2 >{name}</h2>
             </div>
-            <p className='w-[165px font-white]' >Players control a rocket ship and must navigate through an asteroid field, avoiding obstacles and collecting power-ups.</p>
+            <p className='w-[200px] font-white h-[230px] overflow-y-scroll scrollbar-hide ' >{desc}</p>
             <button onClick={notify} className='bg-purple px-[20px] py-2 rounded-md' >Coming soon</button>
         </div>
 
