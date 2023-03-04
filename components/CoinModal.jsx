@@ -6,7 +6,7 @@ import Moralis from "moralis";
 import { EvmChain } from "@moralisweb3/evm-utils";
 import { Atokens } from './../data/arbitrumTokens';
 
-function CoinModal({ closeModal,refetch, isOpen, setCoin, coin, index }) {
+function CoinModal({ closeModal, modifyToken, refetch, isOpen, setCoin, coin, index }) {
   const [coinAddress, setCoinAddress] = useState();
 
 
@@ -14,6 +14,7 @@ function CoinModal({ closeModal,refetch, isOpen, setCoin, coin, index }) {
     setCoin(Atokens[i]);
     refetch()
     closeModal();
+    modifyToken()
   };
 
 

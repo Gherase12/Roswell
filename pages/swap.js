@@ -4,7 +4,7 @@ import {  useSendTransaction, useWaitForTransaction } from "wagmi";
 import { useAccount } from "wagmi";
 import axios  from 'axios';
 import ConnectBtn from "./../components/btn/ConnectBtn";
-import { Input, Popover, Radio, Modal, message } from "antd";
+import { message } from "antd";
 import SwapBord from "../components/SwapBord";
 import { tokenList } from './../data/tokenList';
 import { toast } from 'react-toastify';
@@ -19,8 +19,8 @@ function Swap() {
   // const { address, isConnected } = props;
   const [messageApi, contextHolder] = message.useMessage();
   const [slippage, setSlippage] = useState(2.5);
-  const [tokenOneAmount, setTokenOneAmount] = useState(0);
-  const [tokenTwoAmount, setTokenTwoAmount] = useState(0);
+  const [tokenOneAmount, setTokenOneAmount] = useState(null);
+  const [tokenTwoAmount, setTokenTwoAmount] = useState(null);
   const [tokenOne, setTokenOne] = useState(Atokens[0]);
   const [tokenTwo, setTokenTwo] = useState(Atokens[1]);
   const [isOpen, setIsOpen] = useState(false);
@@ -35,9 +35,7 @@ function Swap() {
   const { data:priceData,  isError, refetch } = useQuery(["priceData", tokenOneAmount], () => fetchPrices(tokenOneAmount,tokenOne.address,tokenTwo.address ,tokenOne.decimals),{ cacheTime: 0,onSuccess: (data) => {
     setTokenTwoAmount((Number(data.price) / (10 ** tokenTwo.decimals)).toFixed(2));
   }});
-  // set(priceData)
-  // setTokenTwoAmount((Number(priceData?.price) / (10 ** tokenTwo.decimals)))
-
+ 
 
   const notify = () => toast.warn("Swap coming soon",{theme: "dark"});
 
@@ -77,46 +75,30 @@ function Swap() {
     const two = tokenTwo;
     setTokenOne(two);
     setTokenTwo(one);
-    // fetchPrices(two.address, one.address);
   }
 
   
 
-  // function modifyToken(i, index){
+  function modifyToken(){
     
 
-  //   if(index == 0 ){
-  //     // setTokenOneAmount(prices.to);
-  //     fetchPrices(tokenList[i].address, tokenTwo.address)
-  //   } else {
-  //     // setTokenTwo(tokenList[i]);
-  //     fetchPrices(tokenOne.address, tokenList[i].address)
-  //   }
-  //   setTokenOneAmount(0)
-  //   setTokenTwoAmount(0)
-  //   console.log(prices)
-  // }
+   
+    setTokenOneAmount(0)
+    setTokenTwoAmount(0)
+    
+  }
 
-  // async function fetchPrices(one, two){
-  //   //http://localhost:3000/api/tokenPrice
-  //     const res = await axios.get(
-  //       // `https://www.roswellaicoin.com/api/tokenPrice`
-  //       `http://localhost:3000/api/tokenPrice`
-  //       , {
-  //       params: {addressOne: one, addressTwo: two}
-  //     }, { method: "GET" })
-
-      
-  //     setPrices(res.data)
-  // }
+ 
 
   async function fetchDexSwap(){
-
-    const allowance = await axios.get(`https://api.1inch.io/v5.0/1/approve/allowance?tokenAddress=${tokenOne.address}&walletAddress=${address}`)
+    console.log(tokenOne.address)
+    console.log(tokenTwo.address)
+    console.log(tokenOneAmount.padEnd(tokenOne.decimals+tokenOneAmount.length, '0'))
+    const allowance = await axios.get(`https://api.1inch.io/v5.0/42161/approve/allowance?tokenAddress=${tokenOne.address}&walletAddress=${address}`)
   
     if(allowance.data.allowance === "0"){
 
-      const approve = await axios.get(`https://api.1inch.io/v5.0/1/approve/transaction?tokenAddress=${tokenOne.address}`)
+      const approve = await axios.get(`https://api.1inch.io/v5.0/42161/approve/transaction?tokenAddress=${tokenOne.address}`)
 
       setTxDetails(approve.data);
       console.log("not approved")
@@ -125,7 +107,7 @@ function Swap() {
     }
 
     const tx = await axios.get(
-      `https://api.1inch.io/v5.0/1/swap?fromTokenAddress=${tokenOne.address}&toTokenAddress=${tokenTwo.address}&amount=${tokenOneAmount.padEnd(tokenOne.decimals+tokenOneAmount.length, '0')}&fromAddress=${address}&slippage=${slippage}`
+      `https://api.1inch.io/v5.0/42161/swap?fromTokenAddress=${tokenOne.address}&toTokenAddress=${tokenTwo.address}&amount=${tokenOneAmount.padEnd(tokenOne.decimals+tokenOneAmount.length, '0')}&fromAddress=${address}&slippage=${slippage}`
     )
 
     let decimals = Number(`1E${tokenTwo.decimals}`)
@@ -136,11 +118,7 @@ function Swap() {
   }
 
 
-  // useEffect(()=>{
-
-  //   fetchPrices(tokenList[0].address, tokenList[1].address)
-
-  // }, [])
+  
 
   useEffect(()=>{
 
@@ -197,13 +175,13 @@ function Swap() {
           <Slippage slippage={slippage} handleSlippageChange={handleSlippageChange} />
           
         </div>
-        <SwapBord refetch={refetch} prices={prices} coin={tokenOne} setCoin={setTokenOne}  switchTokens={switchTokens} tokenAmount={tokenOneAmount} changeAmount={changeAmount} index={0} disabled={false}  />
-        <SwapBord  isError={ isError} refetch={refetch} prices={prices} coin={tokenTwo} setCoin={setTokenTwo} switchTokens={switchTokens} tokenAmount={tokenTwoAmount} changeAmount={changeAmount} index={1} disabled={true} />
+        <SwapBord refetch={refetch} prices={prices} coin={tokenOne} setCoin={setTokenOne} modifyToken={modifyToken}  switchTokens={switchTokens} tokenAmount={tokenOneAmount} changeAmount={changeAmount} index={0} disabled={false}  />
+        <SwapBord  isError={ isError} refetch={refetch} prices={prices} coin={tokenTwo} setCoin={setTokenTwo} modifyToken={modifyToken} switchTokens={switchTokens} tokenAmount={tokenTwoAmount} changeAmount={changeAmount} index={1} disabled={true} />
 
         
         <div className='flex justify-center mt-10'>
           {isConnected ? <ConnectBtn /> : (
-            <button onClick={notify} className="rounded-full bg-purple/30 flex items-center p-2 space-x-2 px-5 text-white font-bold" >
+            <button disabled={!tokenOneAmount} onClick={fetchDexSwap} className="rounded-full bg-purple/30 flex items-center p-2 space-x-2 px-5 text-white font-bold" >
                   Swap
             </button>
           )}

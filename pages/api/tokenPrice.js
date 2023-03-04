@@ -7,7 +7,7 @@ export default async function handler(req, res) {
 
   switch (method) {
     case "GET":
-      console.log(query);
+      // console.log(query);
 
       if(query.amount == 0) { res.status(200).json({
         price: 0
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       );
 
       const price = response.data.bestResult.toTokenAmount;
-      console.log("the price =" + price);
+      // console.log("the price =" + price);
       //   const ratio = 1 / price;
       res.status(200).json({
         price

@@ -90,7 +90,7 @@ export default function Home() {
             </button>
           </div>
           <div className='w-[334px]  h-[356px]  xl:h-[443px] xl:w-[443px] relative mx-auto  '>
-            <Image src='/drone.png' className='object-contain' fill />
+            <Image src='/drone-2.png' className='object-contain' fill />
           </div>
         </div>
       </section>
