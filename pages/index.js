@@ -6,6 +6,7 @@ import { BsTwitter } from "react-icons/bs";
 import Link from "next/link";
 import { toast } from "react-toastify";
 import Roadmap from './../components/Roadmap';
+import Team from "../components/Team";
 
 export default function Home() {
   const notify = () => toast.warn("Coming soon", { theme: "dark" });
@@ -98,13 +99,12 @@ export default function Home() {
       </section>
 
       <Roadmap />
+      <Team />
 
       {/* card section */}
      
 
-      <section>
-
-      </section>
+     
 
       <footer className='flex flex-col mt-[50px]  '>
         <div className=' flex flex-col items-center'>
