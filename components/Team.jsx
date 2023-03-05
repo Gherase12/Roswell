@@ -34,18 +34,18 @@ function Team() {
         </div>
         <div className='grid gap-8 mb-6 lg:mb-16 md:grid-cols-2'>
        {team.map(({name, role, desc},i)=> (   
-       <div className='items-center border-2 border-purple bg-black rounded-lg shadow-lg shadow-purple sm:flex '>
+       <div key={i} className='items-center border-2 border-purple bg-black rounded-lg shadow-lg shadow-purple sm:flex '>
             <a href='#'    >
-              <img className=" w-full object-contain lg:h-[300px]  rounded-lg sm:rounded-none sm:rounded-l-lg" src={`/robots/img-${i}.webp`} alt="Robot Avatar"/>
+              <img className=" w-full  object-contain lg:h-[300px]  rounded-lg sm:rounded-none sm:rounded-l-lg" src={`/robots/img-${i}.webp`} alt="Robot Avatar"/>
             </a>
-            <div className='p-5'>
+            <div className='p-4'>
               <h3 className='text-2 xl font-bold tracking-tight press-font text-purple -white'>
                 <a href='#'>{name}</a>
               </h3>
               <span className='text-white font-bold '>
                 {role}
               </span>
-              <p className='mt-3 mb-4 font-bold  overflow-y-scroll w-full md:max-w-[300px] scrollbar-hide  max-h-[130px] text-purple '>
+              <p className='mt-3 mb-4 font-bold  overflow-y-scroll w-full md:max-w-[300px] scrollbar-hide  max-h-[140px] text-purple '>
                 {desc}
               </p>
               
