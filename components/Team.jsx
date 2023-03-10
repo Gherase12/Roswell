@@ -25,10 +25,10 @@ function Team() {
     <section className='bg-black'>
       <div className='py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 '>
         <div className='mx-auto max-w-screen-sm text-center mb-8 lg:mb-16'>
-          <h2 className='mb-4 text-4xl lg:text-[60px] tracking-tight font-extrabold text-purple '>
+          <h2 className='mb-4 text-4xl lg:text-[60px] press-font tracking-tight font-extrabold text-purple '>
             Our Team
           </h2>
-          <p className=' text-purple lg:my-[40px] sm:text-xl  font-bold'>
+          <p className=' text-purple lg:my-[40px] sm:text-xl press-font  font-bold'>
           The team began working on developing the platform, focusing on building out the core infrastructure and implementing robust security measures.
           </p>
         </div>

@@ -6,7 +6,7 @@ import axios  from 'axios';
 import ConnectBtn from "./../components/btn/ConnectBtn";
 import { message } from "antd";
 import SwapBord from "../components/SwapBord";
-import { tokenList } from './../data/tokenList';
+
 import { toast } from 'react-toastify';
 import Slippage from './../components/Slippage';
 import { fetchPrices } from './../fetchers/getPrices';

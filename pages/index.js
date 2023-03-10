@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import Head from "next/head";
 import Image from "next/image";
 import { BiMicrophone } from "react-icons/bi";
@@ -6,16 +6,44 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { BsTwitter } from "react-icons/bs";
 import Link from "next/link";
 import { toast } from "react-toastify";
-import Roadmap from './../components/Roadmap';
+import Roadmap from "./../components/Roadmap";
 import Team from "../components/Team";
+import { useAccount } from "wagmi";
+import axios  from 'axios';
+import Chat from './../components/Chat';
+import Loading from "../components/Loading";
 
 export default function Home() {
-
-  const [value , setValue] = useState(null)
+  const { isConnected, address } = useAccount();
+  const [value, setValue] = useState(null);
+  const [loading, setLoading] = useState(false)
+  const [aiResponse, setAiResponse] = useState(false)
   const notify = () => toast.warn("Coming soon", { theme: "dark" });
-  const roudmap = ["Doggo ipsum long bois lotsa pats blep. What a nice floof ruff super chub very good spot, the neighborhood pupper lotsa pats. Borkdrive shibe shoober what a nice floof, borking doggo.","Shoober shooberino adorable doggo many pats, heckin good boys many pats pupper wrinkler, corgo maximum borkdrive. A frighten puggo wow very biscit.", "Big ol h*ck adorable doggo vvv smol borking doggo with a long snoot for pats big ol, he made many woofs doing me a frighten puggo wow very biscit, ruff fat boi ruff long doggo.", "Long bois mlem I am bekom fat wrinkler puggo maximum borkdrive big ol pupper I am bekom fat, fluffer vvv adorable doggo lotsa pats snoot. I am bekom fat ur givin me a spook length boy wow very biscit very good spot.", "Doggo ipsum long bois lotsa pats blep. What a nice floof ruff super chub very good spot, the neighborhood pupper lotsa pats. Borkdrive shibe shoober what a nice floof, borking doggo."]
+
+
+  const handleClick = async () => {
+    if (!isConnected) {
+      toast.error("Please connect your wallet", { theme: "dark" });
+      return
+    }
+
+  setLoading(true)
+    try {
+      const response = await axios.post('/api/aiQuestion', {
+        prompt: value
+      });
+      setAiResponse(response.data.content.content)
+      setLoading(false)
+      // console.log('Response:', response.data.content.content);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+  
   return (
-    <div className='overflow-hidden'>
+    <div className='relative overflow-hidden'>
+      {aiResponse && (<Chat aiResponse={aiResponse} />)}
+      
       <Head>
         <title>AI ROSWELL</title>
         <meta name='description' content='AI DEX built on Arbitrum' />
@@ -34,17 +62,29 @@ export default function Home() {
         </h1>
         <input
           type='text'
-          // disabled={true}
-          onChange={(e)=> setValue(e.target.value)}
+          
+          onChange={(e) => setValue(e.target.value)}
           placeholder='Ask me any question...'
           className='bg-purple-black w-[320px] h-[49px] rounded-full p-4 text-white z-20 lg:w-[700px] lg:mt-[300px] outline-none lg:h-[60px] '
         />
-        <button
-          onClick={notify}
-          className={`rounded-full ${value ? "bg-violet-700":"bg-violet-700/25"} w-[70px] h-[70px]  flex items-center justify-center  my-[30px] z-20`}
-        >
-          <BiMicrophone className='text-white text-[30px]  ' />
-        </button>
+        {
+          !loading ? (
+            <button
+            onClick={handleClick}
+            className={`rounded-full ${
+              value ? "bg-violet-700" : "bg-violet-700/25"
+            } w-[70px] h-[70px]  flex items-center justify-center  my-[30px] z-20`}
+          >
+            <BiMicrophone className='text-white text-[30px]  ' />
+          </button>
+          ):(
+            <div className="bg-violet-700 w-[70px] h-[70px] my-[30px] flex items-center justify-center rounded-full z-20 ">
+              
+            <Loading />
+            </div>
+          )
+        }
+       
         <Image
           src={"/robot-sm.webp"}
           width={300}
@@ -58,7 +98,7 @@ export default function Home() {
       <section className=' pt-[100px] xl:px-[194px] '>
         <div className='lg:flex '>
           <div className='flex flex-col items-center lg:justify-center lg:items-start  '>
-            <p className='text-white/60 font-bold px-[42px] text-[20px] max-w-[656px]'>
+            <p className='text-white/60 font-bold px-[42px] text-[20px] tracking-tighter max-w-[656px] press-font'>
               Meet Roswell, the intelligent robot designed to enhance your
               experience in a digital ecosystem. Powered by Arbitirum will be
               the most powerful Dex with advanced AI, you can swap, farm, and
@@ -68,7 +108,10 @@ export default function Home() {
               discover a new world of possibilities with Roswell as your guide.
             </p>
 
-            <button onClick={notify} className='animate-pulse text-purple font-bold flex items-center bg-purple-black mx-auto lg:mx-[42px] my-10 justify-center w-[155px] h-[55px] rounded-full'>
+            <button
+              onClick={notify}
+              className='animate-pulse text-purple font-bold flex items-center bg-purple-black mx-auto lg:mx-[42px] my-10 justify-center w-[155px] h-[55px] rounded-full'
+            >
               Join The Quest
             </button>
           </div>
@@ -80,7 +123,7 @@ export default function Home() {
         {/* 2nd */}
         <div className='lg:flex lg:flex-row-reverse '>
           <div className='flex flex-col items-center lg:justify-center lg:items-start  '>
-            <p className='text-white/60 font-bold px-[42px] text-[20px] max-w-[656px]'>
+            <p className='text-white/60 font-bold px-[42px] press-font tracking-tighter  text-[20px] max-w-[656px]'>
               This Roswell robot will help us to enjoy the AI crypto ecosystem
               much easier. We will swap, farm and play with Roswell.
               <br /> <br /> -Trade
@@ -92,7 +135,10 @@ export default function Home() {
               -NFT marketplace (trade NFTS incredibly low fees)
             </p>
 
-            <button onClick={notify} className='animate-pulse text-purple font-bold flex items-center bg-purple-black mx-auto lg:mx-[42px] my-10 justify-center w-[155px] h-[55px] rounded-full'>
+            <button
+              onClick={notify}
+              className='animate-pulse  text-purple font-bold flex items-center bg-purple-black mx-auto lg:mx-[42px] my-10 justify-center w-[155px] h-[55px] rounded-full'
+            >
               Join The Quest
             </button>
           </div>
@@ -106,9 +152,6 @@ export default function Home() {
       <Team />
 
       {/* card section */}
-     
-
-     
 
       <footer className='flex flex-col mt-[50px]  '>
         <div className=' flex flex-col items-center'>
