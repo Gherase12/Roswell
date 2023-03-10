@@ -93,7 +93,8 @@ function Nav() {
           <Image src='logo.svg' width={90} height={117} />
           <p className='text-purple text-[20px]'>ROSWELL</p>
         </div>
-        <li className=' text-white press-font text-[40px] flex flex-col space-y-5 mt-20 '>
+        <li className=' text-white press-font text-[30px] flex flex-col space-y-5 mt-20 '>
+        <Link href="/" >HOME</Link>
         <Link href="/swap" onClick={closeModal} >TRADE</Link>
         <Link href="/farms" onClick={closeModal} >EARN</Link>
         <Link href="/games" onClick={closeModal} >GAMES</Link>
