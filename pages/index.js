@@ -29,7 +29,7 @@ export default function Home() {
 
   setLoading(true)
     try {
-      const response = await axios.post('/api/aiQuestion', {
+      const response = await axios.post('https://www.roswelldex.ai/api/aiQuestion', {
         prompt: value
       });
       setAiResponse(response.data.content.content)
